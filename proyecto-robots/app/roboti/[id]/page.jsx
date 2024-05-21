@@ -1,17 +1,17 @@
-import { readrobotByIdService, readrobotsService } from '@/server/BL/services/robot.service'
+import { readRobotByIdService, readRobotsService } from '@/server/BL/services/robot.service'
 import { connectToMongo } from '@/server/connectToMongo'
 import Image from 'next/image'
 
 
 export async function generateStaticParams() {
    await connectToMongo()
-   const all = await readrobotsService()
+   const all = await readRobotsService()
    return all.map((robot) => ({ id: String(robot._id) }))
 }
 
 export default async function page({ params: { id } }) {
    await connectToMongo()
-   const robot = await readrobotByIdService(id)
+   const robot = await readRobotByIdService(id)
 
    return (
       <div>
